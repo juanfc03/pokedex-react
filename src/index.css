@@ -1,0 +1,67 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --font: 'Space Mono', monospace, sans-serif;
+  --color-neutral: #f4f4ed;
+  --color-primary: #dc2626;
+  --color-secondary: white;
+  --color-tertiary: #111111;
+  --color-fourth: #f5f2f2;
+
+  --type-normal: #a8a77a;
+  --type-fire: #ee8130;
+  --type-water: #6390f0;
+  --type-electric: #f7d02c;
+  --type-grass: #7ac74c;
+  --type-ice: #96d9d6;
+  --type-fighting: #c22e28;
+  --type-poison: #a33ea1;
+  --type-ground: #e2bf65;
+  --type-flying: #a98ff3;
+  --type-psychic: #f95587;
+  --type-bug: #a6b91a;
+  --type-rock: #b6a136;
+  --type-ghost: #735797;
+  --type-dragon: #6f35fc;
+  --type-dark: #705746;
+  --type-steel: #b7b7ce;
+  --type-fairy: #d685ad;
+
+  scrollbar-gutter: stable;
+}
+
+body {
+  min-height: 100dvh;
+  font-family: var(--font);
+  font-weight: 400;
+  background-color: var(--color-secondary);
+  color: var(--color-tertiary);
+}
+
+#root {
+  min-height: 100dvh;
+  display: grid;
+  grid-template-areas:
+    'header header'
+    'aside main'
+    'footer footer';
+  grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
+  grid-template-rows: auto 1fr auto;
+}
+
+@media (max-width: 720px) {
+  #root {
+    grid-template-areas:
+      'header'
+      'aside'
+      'main'
+      'footer';
+    grid-template-columns: 1fr;
+  }
+}
