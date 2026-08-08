@@ -1,0 +1,97 @@
+.content__filters {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+  padding: 1rem;
+  border: 2px solid var(--color-tertiary);
+  box-shadow: 4px 4px 0 var(--color-tertiary);
+  background-color: var(--color-neutral);
+}
+
+.content__filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--color-tertiary);
+}
+
+.content__filter-title {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.content__filter-select {
+  min-width: 0;
+  max-width: 100%;
+  padding: 8px 32px 8px 12px;
+  border: 2px dashed var(--color-tertiary);
+  background-color: var(--color-fourth);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 0h12L6 8z' fill='%23111111'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  appearance: none;
+  font-family: inherit;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.1s;
+}
+
+.content__filter-select:hover {
+  opacity: 80%;
+}
+
+.content__filter-select:focus-visible {
+  outline: 2px solid var(--color-tertiary);
+  outline-offset: 2px;
+}
+
+.content__filter-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.content__filter-selected {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.content__filter-chip {
+  padding: 4px 10px;
+  border: 1px solid var(--color-tertiary);
+  background-color: var(--color-neutral);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.content__filter-clear {
+  padding: 8px 12px;
+  border: 1px solid var(--color-tertiary);
+  background-color: var(--color-fourth);
+  color: var(--color-tertiary);
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.1s,
+    opacity 0.1s;
+}
+
+.content__filter-clear:hover {
+  transform: scale(1.05);
+}
+
+.content__filter-clear:active {
+  transform: scale(0.95);
+}
