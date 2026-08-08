@@ -34,37 +34,50 @@ function PokemonCard({ pokemon }) {
   );
 }
 
-function PokemonGrid() {
-  const [pokemonList, setPokemonList] = useState([]);
+function PokemonGrid({ pokemonPage, error }) {
+  const [pageData, setPageData] = useState({
+    pokemonPage: null,
+    pokemonList: [],
+  });
+  const [detailError, setDetailError] = useState(false);
 
   useEffect(() => {
-    fetch('https://pokeapi.co/api/v2/pokemon')
-      .then(response => {
-        if (!response.ok) throw new Error('An error ocurred fetching the API');
-        return response.json();
-      })
-      .then(data =>
-        Promise.all(
-          data.results.map(pokemon =>
-            fetch(pokemon.url).then(response => {
-              if (!response.ok)
-                throw new Error(`Failed to fetch ${pokemon.name}`);
-              return response.json();
-            })
-          )
-        )
+    Promise.all(
+      pokemonPage.map(pokemon =>
+        fetch(pokemon.url).then(response => {
+          if (!response.ok) throw new Error(`Failed to fetch ${pokemon.name}`);
+          return response.json();
+        })
       )
-      .then(details => setPokemonList(details))
-      .catch(error => console.log(`Error: ${error}`));
-  }, []);
+    )
+      .then(pokemonList => {
+        setPageData({ pokemonPage, pokemonList });
+        setDetailError(false);
+      })
+      .catch(error => {
+        console.log(`Error: ${error}`);
+        setDetailError(true);
+      });
+  }, [pokemonPage]);
+
+  const pokemonList =
+    pageData.pokemonPage === pokemonPage ? pageData.pokemonList : [];
 
   return (
     <section className="content__list">
-      <ul className="content__grid">
-        {pokemonList.map(pokemon => (
-          <PokemonCard key={pokemon.id} pokemon={pokemon} />
-        ))}
-      </ul>
+      {error || detailError ? (
+        <p className="content__error">
+          Failed to load Pokémon. Check your connection and try again.
+        </p>
+      ) : pokemonList.length === 0 ? (
+        <p className="content__loading">Loading...</p>
+      ) : (
+        <ul className="content__grid">
+          {pokemonList.map(pokemon => (
+            <PokemonCard key={pokemon.id} pokemon={pokemon} />
+          ))}
+        </ul>
+      )}
     </section>
   );
 }

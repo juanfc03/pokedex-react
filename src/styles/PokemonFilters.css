@@ -83,9 +83,7 @@
   font-family: inherit;
   font-weight: 700;
   cursor: pointer;
-  transition:
-    transform 0.1s,
-    opacity 0.1s;
+  transition: transform 0.1s;
 }
 
 .content__filter-clear:hover {

@@ -1,5 +1,4 @@
 import '@/styles/PokemonFilters.css';
-import { useState } from 'react';
 
 const TYPES = [
   'normal',
@@ -22,20 +21,7 @@ const TYPES = [
   'fairy',
 ];
 
-function PokemonFilters() {
-  const [selectedTypes, setSelectedTypes] = useState([]);
-
-  function handleEvent(event) {
-    const value = event.target.value;
-    if (value && !selectedTypes.includes(value))
-      setSelectedTypes([...selectedTypes, value]);
-    event.target.value = '';
-  }
-
-  function clearFilters() {
-    setSelectedTypes([]);
-  }
-
+function PokemonFilters({ activeTypes, onTypeSelect, onClearTypes }) {
   return (
     <form className="content__filters">
       <div className="content__filter-header">
@@ -45,7 +31,10 @@ function PokemonFilters() {
           name="type"
           aria-label="Filter Pokémon by type"
           className="content__filter-select"
-          onChange={handleEvent}
+          onChange={event => {
+            onTypeSelect(event.target.value);
+            event.target.value = '';
+          }}
         >
           <option value="">+ more</option>
           {TYPES.map(type => (
@@ -57,10 +46,10 @@ function PokemonFilters() {
       </div>
       <div className="content__filter-body">
         <ul className="content__filter-selected">
-          {selectedTypes.length === 0 ? (
+          {activeTypes.length === 0 ? (
             <li className="content__filter-chip">No types selected</li>
           ) : (
-            selectedTypes.map(type => (
+            activeTypes.map(type => (
               <li
                 key={type}
                 className="content__filter-chip"
@@ -77,7 +66,7 @@ function PokemonFilters() {
         <button
           type="button"
           className="content__filter-clear"
-          onClick={clearFilters}
+          onClick={onClearTypes}
         >
           Clear filters
         </button>

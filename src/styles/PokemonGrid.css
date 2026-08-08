@@ -78,3 +78,17 @@
   font-size: 0.8rem;
   font-weight: 700;
 }
+
+.content__error {
+  padding: 1rem;
+  border: 2px dashed var(--color-tertiary);
+  background-color: var(--color-neutral);
+  font-weight: 700;
+  text-align: center;
+}
+
+.content__loading {
+  padding: 1rem;
+  font-weight: 700;
+  text-align: center;
+}
